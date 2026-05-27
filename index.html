@@ -619,12 +619,15 @@
         </div>
     </div>
 </footer>
-        <div id="dsc-splash" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #0b111a; display: flex; justify-content: center; align-items: center; z-index: 999999; transition: opacity 0.8s ease, visibility 0.8s ease;">
-        <h1 id="dsc-text" style="color: #4bc7b6; font-size: clamp(3.5rem, 8vw, 6rem); margin: 0; text-shadow: 0 0 15px rgba(75, 199, 182, 0.4);"></h1>
+        <!-- ==========================================
+         WELCOME SPLASH SCREEN (White & Orange Theme)
+         ========================================== -->
+    <div id="dsc-splash" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #ffffff; display: flex; justify-content: center; align-items: center; z-index: 999999; transition: opacity 0.8s ease, visibility 0.8s ease;">
+        <!-- Changed color to #BD5D38 and adjusted the text-shadow to match -->
+        <h1 id="dsc-text" style="color: #BD5D38; font-size: clamp(3.5rem, 8vw, 6rem); margin: 0; text-shadow: 0 0 15px rgba(189, 93, 56, 0.3);"></h1>
     </div>
 
     <script>
-        // An Immediately Invoked Function Expression (IIFE) guarantees this runs the second the browser reads it
         (function() {
             const textEl = document.getElementById("dsc-text");
             const splashEl = document.getElementById("dsc-splash");
@@ -636,7 +639,7 @@
             document.head.appendChild(fontLink);
             textEl.style.fontFamily = "'Pacifico', cursive";
 
-            // 2. Lock the scrollbar so the user can't scroll away
+            // 2. Lock the scrollbar
             document.body.style.overflow = "hidden";
 
             // 3. The Typing Engine
@@ -647,16 +650,15 @@
                 if (i < text.length) {
                     textEl.innerHTML += text.charAt(i);
                     i++;
-                    setTimeout(typeWriter, 150); // Speed of typing
+                    setTimeout(typeWriter, 150); 
                 } else {
                     // Fade out 1 second after typing finishes
                     setTimeout(() => {
                         splashEl.style.opacity = "0";
                         splashEl.style.visibility = "hidden";
                         
-                        // Wait for the CSS fade transition to finish, then remove completely
                         setTimeout(() => {
-                            document.body.style.overflow = ""; // Unlock scrolling
+                            document.body.style.overflow = ""; 
                             splashEl.style.display = "none";
                         }, 800);
                     }, 1000);
@@ -666,7 +668,7 @@
             // Start typing immediately
             setTimeout(typeWriter, 300);
 
-            // 4. Emergency Backup (Forces the screen to vanish after 6 seconds no matter what)
+            // 4. Emergency Backup
             setTimeout(() => {
                 if(splashEl && splashEl.style.display !== "none") {
                     splashEl.style.display = "none";
