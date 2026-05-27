@@ -619,5 +619,67 @@
         </div>
     </div>
 </footer>
+        <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const welcomeTextElement = document.getElementById("welcome-text");
+        const splashScreen = document.getElementById("splash-screen");
+        const body = document.body;
+        
+        // EMERGENCY FALLBACK: Guarantees the screen disappears after 5 seconds 
+        // even if the typing effect fails, so your site never gets permanently stuck.
+        const emergencyClear = setTimeout(() => {
+            if (splashScreen) {
+                splashScreen.style.opacity = "0";
+                setTimeout(() => { 
+                    splashScreen.style.display = "none"; 
+                    body.style.overflow = ""; // Reverts scroll lock
+                }, 800);
+            }
+        }, 5000);
+
+        // Dynamically inject the cursive font so you don't have to edit the <head>
+        const fontLink = document.createElement('link');
+        fontLink.href = 'https://fonts.googleapis.com/css2?family=Pacifico&display=swap';
+        fontLink.rel = 'stylesheet';
+        document.head.appendChild(fontLink);
+        
+        // Apply the font to the text
+        welcomeTextElement.style.fontFamily = "'Pacifico', cursive";
+
+        const text = "Welcome";
+        let index = 0;
+        
+        // Lock scrolling while typing
+        body.style.overflow = "hidden";
+
+        // The Typing Engine
+        function typeWriter() {
+            if (!welcomeTextElement) return;
+            
+            if (index < text.length) {
+                welcomeTextElement.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 150); 
+            } else {
+                // When finished typing, fade out
+                setTimeout(() => {
+                    splashScreen.style.opacity = "0";
+                    splashScreen.style.visibility = "hidden";
+                    
+                    // Wait for fade transition, then destroy the element and unlock scroll
+                    setTimeout(() => {
+                        body.style.overflow = ""; // Reverts scroll lock
+                        splashScreen.style.display = "none";
+                        clearTimeout(emergencyClear); // Cancel the emergency backup
+                    }, 800); 
+                    
+                }, 1000); 
+            }
+        }
+
+        // Start typing slightly after the page loads
+        setTimeout(typeWriter, 400);
+    });
+</script>
     </body>
 </html>
