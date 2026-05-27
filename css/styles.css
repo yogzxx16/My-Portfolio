@@ -11173,36 +11173,39 @@ section#interests {
 }
 
 .highlight-card{
-    background: #f8f4f1;
+    background: #ffffff;
     border-radius: 18px;
-    padding: 25px 20px;
+    padding: 22px 15px;
     text-align: center;
-    border: 1px solid #e5ddd5;
-    transition: 0.3s ease;
+    border: 1px solid #e8e8e8;
+    transition: all 0.3s ease;
     height: 100%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
 }
 
 .highlight-card:hover{
-    transform: translateY(-5px);
+    transform: translateY(-4px);
 }
 
 .highlight-card h2{
     color: #c86b3c;
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 700;
+    margin-bottom: 10px;
 }
 
 .highlight-card p{
-    margin-top: 10px;
-    color: #555;
-    font-size: 0.95rem;
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0;
 }
 
 .internship-card{
-    background: #fff8f3;
+    background: #f8f4f1;
     border-left: 5px solid #c86b3c;
-    padding: 20px;
-    border-radius: 14px;
+    padding: 22px 25px;
+    border-radius: 18px;
+    margin-bottom: 50px;
 }
 
 .internship-card h5{
@@ -11216,13 +11219,14 @@ section#interests {
 }
 
 .cert-card{
-    background: white;
+    background: #fff;
     border-radius: 18px;
-    padding: 30px 20px;
+    padding: 28px 20px;
     text-align: center;
     border: 1px solid #ececec;
     height: 100%;
     transition: 0.3s ease;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.05);
 }
 
 .cert-card:hover{
@@ -11231,6 +11235,7 @@ section#interests {
 
 .cert-logo{
     height: 70px;
+    max-width: 180px;
     object-fit: contain;
     margin-bottom: 20px;
 }
@@ -11239,18 +11244,22 @@ section#interests {
     font-size: 1rem;
     font-weight: 700;
     margin-bottom: 10px;
+    min-height: 45px;
 }
 
 .cert-issuer{
     color: #777;
     margin-bottom: 20px;
+    font-size: 0.95rem;
 }
 
 .cert-btn{
     background: #c86b3c;
     color: white;
     border-radius: 10px;
-    padding: 8px 18px;
+    padding: 10px 18px;
+    font-size: 0.9rem;
+    border: none;
 }
 
 .cert-btn:hover{
