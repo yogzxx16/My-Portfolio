@@ -10,19 +10,12 @@
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body id="page-top">
-        
-    <div id="splash-screen">
-        <h1 id="welcome-text"></h1>
-    </div>
-    
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
             <a class="navbar-brand js-scroll-trigger" href="#page-top">
@@ -626,49 +619,5 @@
         </div>
     </div>
 </footer>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/scripts.js"></script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const welcomeTextElement = document.getElementById("welcome-text");
-            const splashScreen = document.getElementById("splash-screen");
-            const body = document.body;
-            
-            // The text you want to type
-            const text = "Welcome";
-            let index = 0;
-            
-            // Lock scrolling while the splash screen is active
-            body.classList.add("no-scroll");
-
-            function typeWriter() {
-                if (index < text.length) {
-                    welcomeTextElement.innerHTML += text.charAt(index);
-                    index++;
-                    // Speed of the typing effect in milliseconds
-                    setTimeout(typeWriter, 150); 
-                } else {
-                    // Once typing is finished, wait a moment, then fade out
-                    setTimeout(() => {
-                        splashScreen.style.opacity = "0";
-                        splashScreen.style.visibility = "hidden";
-                        
-                        // Unlock scrolling and remove element from layout after transition finishes
-                        setTimeout(() => {
-                            body.classList.remove("no-scroll");
-                            splashScreen.style.display = "none";
-                        }, 800); // This should match the CSS transition time
-                        
-                    }, 1000); // How long the full word stays on screen before fading
-                }
-            }
-
-            // Start the typing effect slightly after the page loads
-            setTimeout(typeWriter, 400);
-        });
-    </script>
-</body>
-</html>
     </body>
 </html>
