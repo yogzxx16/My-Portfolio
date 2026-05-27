@@ -619,67 +619,61 @@
         </div>
     </div>
 </footer>
-        <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const welcomeTextElement = document.getElementById("welcome-text");
-        const splashScreen = document.getElementById("splash-screen");
-        const body = document.body;
-        
-        // EMERGENCY FALLBACK: Guarantees the screen disappears after 5 seconds 
-        // even if the typing effect fails, so your site never gets permanently stuck.
-        const emergencyClear = setTimeout(() => {
-            if (splashScreen) {
-                splashScreen.style.opacity = "0";
-                setTimeout(() => { 
-                    splashScreen.style.display = "none"; 
-                    body.style.overflow = ""; // Reverts scroll lock
-                }, 800);
-            }
-        }, 5000);
+        <div id="dsc-splash" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #0b111a; display: flex; justify-content: center; align-items: center; z-index: 999999; transition: opacity 0.8s ease, visibility 0.8s ease;">
+        <h1 id="dsc-text" style="color: #4bc7b6; font-size: clamp(3.5rem, 8vw, 6rem); margin: 0; text-shadow: 0 0 15px rgba(75, 199, 182, 0.4);"></h1>
+    </div>
 
-        // Dynamically inject the cursive font so you don't have to edit the <head>
-        const fontLink = document.createElement('link');
-        fontLink.href = 'https://fonts.googleapis.com/css2?family=Pacifico&display=swap';
-        fontLink.rel = 'stylesheet';
-        document.head.appendChild(fontLink);
-        
-        // Apply the font to the text
-        welcomeTextElement.style.fontFamily = "'Pacifico', cursive";
-
-        const text = "Welcome";
-        let index = 0;
-        
-        // Lock scrolling while typing
-        body.style.overflow = "hidden";
-
-        // The Typing Engine
-        function typeWriter() {
-            if (!welcomeTextElement) return;
+    <script>
+        // An Immediately Invoked Function Expression (IIFE) guarantees this runs the second the browser reads it
+        (function() {
+            const textEl = document.getElementById("dsc-text");
+            const splashEl = document.getElementById("dsc-splash");
             
-            if (index < text.length) {
-                welcomeTextElement.innerHTML += text.charAt(index);
-                index++;
-                setTimeout(typeWriter, 150); 
-            } else {
-                // When finished typing, fade out
-                setTimeout(() => {
-                    splashScreen.style.opacity = "0";
-                    splashScreen.style.visibility = "hidden";
-                    
-                    // Wait for fade transition, then destroy the element and unlock scroll
-                    setTimeout(() => {
-                        body.style.overflow = ""; // Reverts scroll lock
-                        splashScreen.style.display = "none";
-                        clearTimeout(emergencyClear); // Cancel the emergency backup
-                    }, 800); 
-                    
-                }, 1000); 
-            }
-        }
+            // 1. Inject the cursive font
+            const fontLink = document.createElement('link');
+            fontLink.href = 'https://fonts.googleapis.com/css2?family=Pacifico&display=swap';
+            fontLink.rel = 'stylesheet';
+            document.head.appendChild(fontLink);
+            textEl.style.fontFamily = "'Pacifico', cursive";
 
-        // Start typing slightly after the page loads
-        setTimeout(typeWriter, 400);
-    });
-</script>
+            // 2. Lock the scrollbar so the user can't scroll away
+            document.body.style.overflow = "hidden";
+
+            // 3. The Typing Engine
+            const text = "Welcome";
+            let i = 0;
+            
+            function typeWriter() {
+                if (i < text.length) {
+                    textEl.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 150); // Speed of typing
+                } else {
+                    // Fade out 1 second after typing finishes
+                    setTimeout(() => {
+                        splashEl.style.opacity = "0";
+                        splashEl.style.visibility = "hidden";
+                        
+                        // Wait for the CSS fade transition to finish, then remove completely
+                        setTimeout(() => {
+                            document.body.style.overflow = ""; // Unlock scrolling
+                            splashEl.style.display = "none";
+                        }, 800);
+                    }, 1000);
+                }
+            }
+
+            // Start typing immediately
+            setTimeout(typeWriter, 300);
+
+            // 4. Emergency Backup (Forces the screen to vanish after 6 seconds no matter what)
+            setTimeout(() => {
+                if(splashEl && splashEl.style.display !== "none") {
+                    splashEl.style.display = "none";
+                    document.body.style.overflow = "";
+                }
+            }, 6000);
+        })();
+    </script>
     </body>
 </html>
